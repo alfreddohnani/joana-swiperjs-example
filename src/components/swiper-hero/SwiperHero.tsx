@@ -120,11 +120,30 @@ export default function HeroesSwiper() {
           <SwiperSlide key={String(i)}>
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 sm:gap-x-4 gap-y-10">
               {grid.map(({ title, src }, i) => (
-                <article key={String(i)} className="relative h-[400px]">
-                  {/* Change the height of the image here, if you want. (h-[400px]) */}
-                  <img src={src} alt={title} className="h-full" />
-                  <div className="h-16 bg-black/40 absolute left-0 bottom-0 w-full flex items-center justify-center text-white font-semibold">
-                    <h3>{title}</h3>
+                <article
+                  key={String(i)}
+                  className="group [perspective:1000px] h-[400px] w-full relative"
+                >
+                  <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    {/* Front of card */}
+                    <div className="absolute w-full h-full backface-hidden">
+                      <img
+                        src={src}
+                        alt={title}
+                        className="h-full w-full object-cover"
+                      />
+                      <div className="h-16 bg-gray-100/40 absolute left-0 bottom-0 w-full flex items-center justify-center  font-semibold">
+                        <h3>{title}</h3>
+                      </div>
+                    </div>
+
+                    {/* Back of card */}
+                    <div className="absolute w-full h-full [transform:rotateY(180deg)] backface-hidden bg-gray-100  flex flex-col items-center justify-center px-4 text-center">
+                      <h3 className="text-xl font-bold">Thomas Gustini</h3>
+                      <p className="mt-2 text-sm">
+                        Lorem ipsum dolor dummet....
+                      </p>
+                    </div>
                   </div>
                 </article>
               ))}
